@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 
 
         talon::TalonSRX talon(&n, *motor_nb_c);
-        talon.setup((int)*motor_nb_c, modePercentOutput, *motor_nb_c);
+        talon.setup(*motor_nb_c, modePercentOutput, *motor_nb_c);
 
         ROS_INFO_STREAM("Motor ID " + motor_nb_str + " - Status: STARTED");
 
