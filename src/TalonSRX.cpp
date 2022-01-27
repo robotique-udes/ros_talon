@@ -9,8 +9,7 @@ namespace talon
     	_motor_nb = motor_nb;
     	_topic = "ros_talon";
     	_topic.push_back(motor_nb);
-    	ROS_INFO_STREAM(motor_nb);
-    	ROS_INFO_STREAM(_topic);
+    
     	/*
     	Publish to the /sent_messages topic.
     	socketcan_bridge will take care of sending the can_msgs/Frame message through CAN.
@@ -62,6 +61,7 @@ namespace talon
 
 	void TalonSRX::setup(unsigned char ID, unsigned char mode, char motor_nb)
 	{
+		ROS_INFO_STREAM(ID)
 		_ccwLimit = 0; // Limits initially unactive
 		_cwLimit = 0;
 		_center = 2; // Center on an uncertain state
