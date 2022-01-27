@@ -59,8 +59,9 @@ namespace talon
 	}
 
 
-	void TalonSRX::setup(unsigned char ID, unsigned char mode, char motor_nb)
+	void TalonSRX::setup(unsigned char ID, unsigned char mode)
 	{
+		std::cout << ID << std::endl;
 		std::cout << ID << std::endl;
 		_ccwLimit = 0; // Limits initially unactive
 		_cwLimit = 0;

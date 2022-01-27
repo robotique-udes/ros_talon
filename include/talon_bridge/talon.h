@@ -41,7 +41,7 @@ class TalonSRX
 {
 	public:
 		TalonSRX(ros::NodeHandle* nh, unsigned char motor_nb);
-		void setup(unsigned char ID, unsigned char mode, char motor_nb);
+		void setup(unsigned char ID, unsigned char mode);
 
 	private:
 		uint32_t _data32;
