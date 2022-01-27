@@ -46,7 +46,7 @@ namespace talon
 		else if(speed < -1023)
 			speed = -1023;
 		*/
-		int32_t speed = (int32_t)(_percent)
+		int32_t speed = (int32_t)(_percent);
 
 		can_msgs::Frame f;
 		f.id = CONTROL_3 | _baseArbID;
