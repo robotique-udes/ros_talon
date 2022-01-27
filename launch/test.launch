@@ -10,9 +10,9 @@
     </node>
     
     <!-- Launch driver for each motor -->
-    <node pkg="ros_talon" type="direct_drive" name="motor1" output="screen">  
+    <!--<node pkg="ros_talon" type="direct_drive" name="motor1" output="screen">  
       <param name="motor_nb" value="1" type="str"/>
-    </node>
+    </node> -->
     
     <node pkg="ros_talon" type="direct_drive" name="motor2" output="screen">
       <param name="motor_nb" value="2" type="str"/>
