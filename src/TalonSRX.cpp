@@ -9,6 +9,8 @@ namespace talon
     	_motor_nb = motor_nb;
     	_topic = "ros_talon";
     	_topic.push_back(motor_nb);
+    	ROS_INFO_STREAM(motor_nb);
+    	ROS_INFO_STREAM(_topic);
     	/*
     	Publish to the /sent_messages topic.
     	socketcan_bridge will take care of sending the can_msgs/Frame message through CAN.
