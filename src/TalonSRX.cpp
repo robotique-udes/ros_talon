@@ -109,7 +109,7 @@ namespace talon
 				_TalonInput = _nh->subscribe(_topic + "/in/steering_angle", 10, &TalonSRX::setPos, this);
 
 				// Center the drive train.
-				TalonSRX::findCenter();
+				//TalonSRX::findCenter();
 				break;
 
 			//Not implemented yet
