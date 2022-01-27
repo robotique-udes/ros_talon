@@ -60,7 +60,7 @@ namespace talon
 		f.data[1] = (unsigned char) (speed >> 8);
 		f.data[2] = (unsigned char) (speed >> 0);
 
-		f.data[5] = (unsigned char) (2);
+		//f.data[5] = (unsigned char) (2);
 		_CANSender.publish(f);
 	}
 
