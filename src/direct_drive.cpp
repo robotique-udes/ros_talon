@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 
     if (private_nh.getParam("motor_nb", motor_nb_str))
     {
-        const char* motor_nb_c = motor_nb_str.c_str();
+        unsigned char motor_nb_c = *(motor_nb_str.c_str());
 
         if (stoi(motor_nb_str) > 6 || stoi(motor_nb_str) < 1)
         {
@@ -57,8 +57,8 @@ int main(int argc, char **argv)
         }
 
 
-        talon::TalonSRX talon(&n, *motor_nb_c);
-        talon.setup(1, modePercentOutput, *motor_nb_c);
+        talon::TalonSRX talon(&n, motor_nb_c);
+        talon.setup(motor_nb_c, modePercentOutput, motor_nb_c);
 
         ROS_INFO_STREAM("Motor ID " + motor_nb_str + " - Status: STARTED");
 
