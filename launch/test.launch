@@ -28,10 +28,10 @@
 
     <node pkg="ros_talon" type="direct_drive" name="motor5" output="screen">
       <param name="motor_nb" value="5" type="str"/>
-    </node> -->
+    </node> 
 
     <node pkg="ros_talon" type="direct_drive" name="motor6" output="screen">
       <param name="motor_nb" value="6" type="str"/>
-    </node> 
+    </node> -->
   </group>
 </launch>
