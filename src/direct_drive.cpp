@@ -56,6 +56,7 @@ int main(int argc, char **argv)
             return 0;
         }
 
+        std::cout << typeof(motor_nb_c) << std::endl;
 
         talon::TalonSRX talon(&n, motor_nb_c);
         talon.setup(motor_nb_c, modePercentOutput, motor_nb_c);
