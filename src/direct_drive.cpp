@@ -56,6 +56,9 @@ int main(int argc, char **argv)
             return 0;
         }
 
+        std::string test = "Test : ";
+        ROS_INFO_STREAM(test.push_back(motor_nb_c));
+
         talon::TalonSRX talon(&n, motor_nb_c);
         talon.setup(1, modePercentOutput, motor_nb_c);
 
