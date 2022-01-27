@@ -59,7 +59,7 @@ int main(int argc, char **argv)
         std::cout << typeid(motor_nb_c).name() << std::endl;
 
         talon::TalonSRX talon(&n, motor_nb_c);
-        talon.setup(2, modePercentOutput, motor_nb_c);
+        talon.setup(1, modePercentOutput, motor_nb_c);
 
         ROS_INFO_STREAM("Motor ID " + motor_nb_str + " - Status: STARTED");
 
