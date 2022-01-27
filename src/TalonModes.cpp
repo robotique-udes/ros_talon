@@ -9,12 +9,15 @@ namespace talon
 	}
 
 	void TalonSRX::ServoPos()
-	{
+	{	/*
 		int32_t position = (int32_t)(_pos*6045/360);
 		if(position > 7000)
 			position = 7000;
 		else if(position < -7000)
 			position = -7000;
+		*/
+
+		int32_t position = _pos
 
 		can_msgs::Frame f;
 		f.id = CONTROL_3 | _baseArbID;
@@ -27,7 +30,7 @@ namespace talon
 		f.data[0] = (unsigned char) (position >> 16);
 		f.data[1] = (unsigned char) (position >> 8);
 		f.data[2] = (unsigned char) (position >> 0);
-		f.data[5] = (unsigned char) (1);
+		f.data[5] = (unsigned char) (2);
 		_CANSender.publish(f);
 	}
 
@@ -60,3 +63,10 @@ namespace talon
 	}
 
 }; // namespace talon_interface
+
+
+//velocity setpoint : position units(ticks) / 100ms
+
+// Convert 500 RPM to units / 100ms. : 
+// targetVelocity_UnitsPer100ms = leftYstick[-1. to 1.] * 500.0 * 4096 / 600;
+// 4096 Units/Rev * 500 RPM / 600 100ms/min in either direction:

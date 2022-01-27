@@ -55,6 +55,7 @@ class TalonSRX
 		unsigned char _pauseFunction;
 		int32_t _currentPos;
 		unsigned char _motor_nb;
+		std::string _topic;
 
 		float _statusTemp;
 		float _statusOutputCurrent;

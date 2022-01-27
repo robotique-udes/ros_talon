@@ -7,6 +7,8 @@ namespace talon
 	TalonSRX::TalonSRX(ros::NodeHandle* nh, unsigned char motor_nb)
     {
     	_motor_nb = motor_nb;
+    	_topic = "ros_talon";
+    	_topic.push_back(motor_nb);
     	/*
     	Publish to the /sent_messages topic.
     	socketcan_bridge will take care of sending the can_msgs/Frame message through CAN.
@@ -17,15 +19,13 @@ namespace talon
     	Publish to the ros_talon/current_position topic.
     	This is taken care of by TalonSRX::unpackStatus3(const can_msgs::Frame &f).
     	*/
-    	std::string topic = "ros_talon";
-    	topic.push_back(motor_nb);
-    	_posPub = nh->advertise<std_msgs::Float32>(topic + "/current_position", 10);
+    	_posPub = nh->advertise<std_msgs::Float32>(_topic + "/out/current_position", 10);
 
     	/*
 		Publish to the ros_talon/status topic.
 		This is taken care of by TalonSRX::publishStatus(), and gets called every loop.
     	*/
-    	_statusPub = nh->advertise<ros_talon::Status>(topic + "/status",10);
+    	_statusPub = nh->advertise<ros_talon::Status>(_topic + "/out/status",10);
 
     	/*
 		Every CAN Frame received by the socket_can bridge gets published to the /recieved_messages
@@ -75,9 +75,6 @@ namespace talon
 		_statusBusVoltage = 0.0;
 		_statusClosedLoopError = 0.0;
 
-		std::string topic = "ros_talon";
-    	topic.push_back(motor_nb);
-
 		//device ID 0x3F is reserved for general addressing on enable frames.
 		if(ID == 0x3F)
 			ROS_ERROR("Using reserved ID.");
@@ -98,7 +95,7 @@ namespace talon
 				Listen to the motor_percent topic. Pass incoming messages to
 				TalonSRX::setPercentVal(const std_msgs::Int32 &f), located at TalonModes.cpp
 				*/
-				_TalonInput = _nh->subscribe(topic + "/motor_percent", 10, &TalonSRX::setPercentVal, this);
+				_TalonInput = _nh->subscribe(_topic + "/in/motor_percent", 10, &TalonSRX::setPercentVal, this);
 				break;
 
 			case modeServoPosition:
@@ -109,7 +106,7 @@ namespace talon
 				Listen to the motor_percent topic. Pass incoming messages to
 				TalonSRX::setPos(const std_msgs::Float32 &f), located at TalonModes.cpp
 				*/
-				_TalonInput = _nh->subscribe(topic + "/steering_angle", 10, &TalonSRX::setPos, this);
+				_TalonInput = _nh->subscribe(topic + "/in/steering_angle", 10, &TalonSRX::setPos, this);
 
 				// Center the drive train.
 				TalonSRX::findCenter();
