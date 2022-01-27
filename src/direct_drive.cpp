@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 
     if (private_nh.getParam("motor_nb", motor_nb_str))
     {
-        unsigned char motor_nb_c = *(motor_nb_str.c_str());
+        unsigned char motor_nb_c = (unsigned char)*(motor_nb_str.c_str());
 
         if (stoi(motor_nb_str) > 6 || stoi(motor_nb_str) < 1)
         {
