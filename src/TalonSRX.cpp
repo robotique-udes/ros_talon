@@ -39,7 +39,7 @@ namespace talon
 		This is done by TalonSRX::setPID(ros_talon::SetPID::Request  &req, ros_talon::SetPID::Response &res)
 		This function is located at TalonCfg.cpp.
     	*/
-    	_spid = nh->advertiseService(topic + "/SetPID", &TalonSRX::setPID, this);
+    	_spid = nh->advertiseService(_topic + "/SetPID", &TalonSRX::setPID, this);
 
     	/*
 		Advertise the setPID service. When called, drive the motor on percentOutput mode in the right direction
@@ -47,7 +47,7 @@ namespace talon
 		TalonSRX::FindCenter(ros_talon::SetPID::Request  &req, ros_talon::SetPID::Response &res)
 		This function is located at TalonRoutines.cpp.
     	*/
-    	_fcenter = nh->advertiseService(topic + "/FindCenter", &TalonSRX::FindCenter, this);
+    	_fcenter = nh->advertiseService(_topic + "/FindCenter", &TalonSRX::FindCenter, this);
 
     	/*
 		Run the loop at 20Hz to prevent the device from idling.
@@ -187,7 +187,7 @@ namespace talon
 	frame, may be found on the TalonSRX's Software Reference Manual.
 
 	The bit operations performed to retreive the data from each Status Frame has been directly
-	ported from CTRE's Phoenix API. 
+	ported from. 
 	*/
 
 	void TalonSRX::unpackStatus1(const can_msgs::Frame &f)
