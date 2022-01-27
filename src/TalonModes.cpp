@@ -17,7 +17,7 @@ namespace talon
 			position = -7000;
 		*/
 
-		int32_t position = _pos
+		int32_t position = _pos;
 
 		can_msgs::Frame f;
 		f.id = CONTROL_3 | _baseArbID;
