@@ -106,7 +106,7 @@ namespace talon
 				Listen to the motor_percent topic. Pass incoming messages to
 				TalonSRX::setPos(const std_msgs::Float32 &f), located at TalonModes.cpp
 				*/
-				_TalonInput = _nh->subscribe(topic + "/in/steering_angle", 10, &TalonSRX::setPos, this);
+				_TalonInput = _nh->subscribe(_topic + "/in/steering_angle", 10, &TalonSRX::setPos, this);
 
 				// Center the drive train.
 				TalonSRX::findCenter();
