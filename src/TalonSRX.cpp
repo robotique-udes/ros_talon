@@ -61,7 +61,7 @@ namespace talon
 
 	void TalonSRX::setup(unsigned char ID, unsigned char mode, char motor_nb)
 	{
-		ROS_INFO_STREAM(ID);
+		std::cout << ID << std::endl;
 		_ccwLimit = 0; // Limits initially unactive
 		_cwLimit = 0;
 		_center = 2; // Center on an uncertain state
