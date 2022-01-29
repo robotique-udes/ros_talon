@@ -48,7 +48,7 @@ int main(int argc, char **argv)
 	char motor_nb_c = motor_nb_str.back();
 
 	talon::TalonSRX talon(&n, motor_nb_c);
-	talon.setup(motor_nb, modeServoPosition);
+	talon.setup(motor_nb, modeServoPosition, motor_nb_c);
 	ros::spin();
 	return 0;
 }

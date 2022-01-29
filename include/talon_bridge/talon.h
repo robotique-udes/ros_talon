@@ -48,6 +48,7 @@ class TalonSRX
 		uint _baseArbID;
 		int32_t _percent;
 		float _pos;
+		std::string _topic;
 		unsigned char _center;
 		unsigned char _cwLimit;
 		unsigned char _ccwLimit;

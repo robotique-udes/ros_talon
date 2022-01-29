@@ -59,7 +59,7 @@ namespace talon
 	}
 
 
-	void TalonSRX::setup(unsigned char ID, unsigned char mode)
+	void TalonSRX::setup(unsigned char ID, unsigned char mode, char motor_nb)
 	{
 		std::cout << ID << std::endl;
 		std::cout << ID << std::endl;
