@@ -39,14 +39,11 @@ namespace talon
 
 	void TalonSRX::percentOutput()
 	{
-		/*
-		int32_t speed = (int32_t)(-_percent*1023/100);
-		if(speed > 1023)
-			speed = 1023;
-		else if(speed < -1023)
-			speed = -1023;
-		*/
-		int32_t speed = (int32_t)(_percent);
+		int32_t speed_cmd = (int32_t)(-_percent*1023/100);
+		if(speed_cmd > 1023)
+			speed_cmd = 1023;
+		else if(speed_cmd < -1023)
+			speed_cmd = -1023;
 
 		can_msgs::Frame f;
 		f.id = CONTROL_3 | _baseArbID;
@@ -56,11 +53,36 @@ namespace talon
 		f.is_extended = true;
 		for (int i = 0; i < 8; i++)
 			f.data[i] = 0;
-		f.data[0] = (unsigned char) (speed >> 16);
-		f.data[1] = (unsigned char) (speed >> 8);
-		f.data[2] = (unsigned char) (speed >> 0);
+		f.data[0] = (unsigned char) (speed_cmd >> 16);
+		f.data[1] = (unsigned char) (speed_cmd >> 8);
+		f.data[2] = (unsigned char) (speed_cmd >> 0);
 
 		//f.data[5] = (unsigned char) (2);
+		_CANSender.publish(f);
+	}
+
+	/*PID SPEED*/
+	void TalonSRX::setSpeed(const std_msgs::Float32 &f){
+		if(!_ignoreTopics)
+			_speed = f.data; //A speed in radian/s
+	}
+
+	void TalonSRX::speedPID()
+	{
+		int32_t speed_cmd = (int32_t)(_speed);
+		
+		can_msgs::Frame f;
+		f.id = CONTROL_3 | _baseArbID;
+		f.dlc = 8;
+		f.is_error = false;
+		f.is_rtr = false;
+		f.is_extended = true;
+		for (int i = 0; i < 8; i++)
+			f.data[i] = 0;
+		f.data[0] = (unsigned char) (speed_cmd >> 16);
+		f.data[1] = (unsigned char) (speed_cmd >> 8);
+		f.data[2] = (unsigned char) (speed_cmd >> 0);
+		f.data[5] = (unsigned char) (2);
 		_CANSender.publish(f);
 	}
 

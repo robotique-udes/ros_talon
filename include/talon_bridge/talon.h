@@ -33,7 +33,9 @@
 #define modeNoAction		0x00
 #define modePercentOutput	0x01
 #define modeServoPosition	0x02
-#define modeMotionProfile	0x03
+#define modeSpeedPID		0x03
+#define modeMotionProfile	0x04
+
 
 namespace talon
 {
@@ -48,6 +50,7 @@ class TalonSRX
 		uint _baseArbID;
 		int32_t _percent;
 		float _pos;
+		float _speed; // in ticks per 100ms
 		std::string _topic;
 		unsigned char _center;
 		unsigned char _cwLimit;
@@ -82,7 +85,7 @@ class TalonSRX
 		ros::ServiceServer _fcenter;
 		ros::ServiceServer _spid;
 
-		
+		// Control frames functions
 		void TalonLoop(const ros::TimerEvent& event);
 		void enableFrame();
 
@@ -93,6 +96,10 @@ class TalonSRX
 		void setPos(const std_msgs::Float32 &f);
 		void setFeedback2QuadEncoder(); //Actually, this function is not necessary as the Talon defaults to QuadEncoder.
 
+		void speedPID();
+		void setSpeed(const std_msgs::Float32 &f);
+
+		// Feedback frames processing
 		void processCanFrame(const can_msgs::Frame &f);
 		void unpackStatus1(const can_msgs::Frame &f);
 		void unpackStatus2(const can_msgs::Frame &f);

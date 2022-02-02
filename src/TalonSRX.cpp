@@ -61,8 +61,6 @@ namespace talon
 
 	void TalonSRX::setup(unsigned char ID, unsigned char mode, char motor_nb)
 	{
-		std::cout << ID << std::endl;
-		std::cout << ID << std::endl;
 		_ccwLimit = 0; // Limits initially unactive
 		_cwLimit = 0;
 		_center = 2; // Center on an uncertain state
@@ -112,13 +110,25 @@ namespace talon
 				_TalonInput = _nh->subscribe(_topic + "/in/steering_angle", 10, &TalonSRX::setPos, this);
 
 				// Center the drive train.
-				//TalonSRX::findCenter();
+				TalonSRX::findCenter();
+				break;
+
+			case modeSpeedPID:
+				_speed = 0;
+				_modeFunc = &TalonSRX::speedPID; //Set the main function to PID speed
+
+				/*
+				Listen to the speed_cmd topic. Pass incoming messages to
+				TalonSRX::setSpeed(const std_msgs::Float32 &f), located at TalonModes.cpp
+				*/
+				_TalonInput = _nh->subscribe(_topic + "/in/speed_cmd", 10, &TalonSRX::setSpeed, this);
 				break;
 
 			//Not implemented yet
 			case modeMotionProfile:
 				_modeFunc = NULL;
 				break;
+
 
 			default:
 				_modeFunc = NULL;
