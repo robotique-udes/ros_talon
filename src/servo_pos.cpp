@@ -49,6 +49,8 @@ int main(int argc, char **argv)
 
 	talon::TalonSRX talon(&n, motor_nb_c);
 	talon.setup(motor_nb, modeServoPosition, motor_nb_c);
+
+	ROS_WARN_STREAM("Motor ID 1 : " << motor_nb_c);
 	ros::spin();
 	return 0;
 }
