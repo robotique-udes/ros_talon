@@ -50,6 +50,8 @@ int main(int argc, char **argv)
 	//talon.setup(1, modePercentOutput, motor_nb_c);
 	talon.setup(1, modeServoPosition, motor_nb_c);
 
+	talon.setZero()
+
 	ROS_WARN_STREAM("Motor ID 1 : " << motor_nb_c);
 	ros::spin();
 	return 0;
