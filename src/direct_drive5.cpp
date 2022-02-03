@@ -41,13 +41,14 @@ int main(int argc, char **argv)
 {
 	ros::init(argc, argv, "ros_talon");
 	ros::NodeHandle n;
+	ros::NodeHandle private_nh("~");
 
 	std::string motor_nb_str;
 	motor_nb_str = ros::this_node::getName();
 	unsigned char motor_nb_c = motor_nb_str.back();
 
-	talon::TalonSRX talon(&n, motor_nb_c);
-	talon.setup(5, modePercentOutput, motor_nb_c);
+	talon::TalonSRX talon(&n, private_nh, motor_nb_c);
+	talon.setup(5);
 
 	ROS_WARN_STREAM("Motor ID 5 : " << motor_nb_c);
 	ros::spin();

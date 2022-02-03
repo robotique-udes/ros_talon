@@ -21,6 +21,7 @@ add_message_files(
   msg
   FILES
   Status.msg
+  cmd.msg
 )
 
 generate_messages(
@@ -64,7 +65,7 @@ add_executable(direct_drive3 src/direct_drive3.cpp)
 add_executable(direct_drive4 src/direct_drive4.cpp)
 add_executable(direct_drive5 src/direct_drive5.cpp)
 add_executable(direct_drive6 src/direct_drive6.cpp)
-add_executable(servo_pos src/servo_pos.cpp)
+
 target_link_libraries(direct_drive1
   talon_lib
   ${catkin_LIBRARIES}
@@ -89,7 +90,4 @@ target_link_libraries(direct_drive6
   talon_lib
   ${catkin_LIBRARIES}
 )
-target_link_libraries(servo_pos
-  talon_lib
-  ${catkin_LIBRARIES}
-)
+
