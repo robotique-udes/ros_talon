@@ -126,7 +126,6 @@ namespace talon
 				*/
 				_TalonInput = _nh->subscribe(_topic + "/in/speed_cmd", 10, &TalonSRX::setSpeed, this);
 				
-				setFeedback2QuadEncoder();
 				break;
 
 			//Not implemented yet
