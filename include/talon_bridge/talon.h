@@ -50,7 +50,7 @@ class TalonSRX
 		uint _baseArbID;
 		int32_t _percent;
 		float _pos;
-		float _speed; // in ticks per 100ms
+		std::Float32 _speed; // in ticks per 100ms
 		std::string _topic;
 		unsigned char _center;
 		unsigned char _cwLimit;

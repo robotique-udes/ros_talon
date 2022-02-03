@@ -70,6 +70,8 @@ namespace talon
 	void TalonSRX::speedPID()
 	{
 		int32_t speed_cmd = (int32_t)(_speed);
+		std::cout << _speed << std::endl;
+		std::cout << speed_cmd << std::endl;
 		
 		can_msgs::Frame f;
 		f.id = CONTROL_3 | _baseArbID;
