@@ -125,6 +125,8 @@ namespace talon
 				TalonSRX::setSpeed(const std_msgs::Float32 &f), located at TalonModes.cpp
 				*/
 				_TalonInput = _nh->subscribe(_topic + "/in/speed_cmd", 10, &TalonSRX::setSpeed, this);
+				
+				setFeedback2QuadEncoder();
 				break;
 
 			//Not implemented yet
