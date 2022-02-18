@@ -49,7 +49,8 @@ int main(int argc, char **argv)
 
 	talon::TalonSRX talon(&n, private_nh, motor_nb_c);
 	//talon.setup(1, modePercentOutput, motor_nb_c);
-	talon.setup(1, "left");
+
+	talon.setup(1);
 
 	ROS_INFO_STREAM("Motor ID 1 : " << motor_nb_c);
 	ros::spin();

@@ -22,6 +22,7 @@ namespace talon
 				ROS_INFO_STREAM("MOTOR " << _motor_nb << ":\n\tSending this command -> " 
 					<< _cmd << "\n\tWith mode -> " << c.cmd_mode);
 		}
+
 	}
 
 	void TalonSRX::setCmdPercent(const std_msgs::Int32 &percent)
@@ -80,6 +81,8 @@ namespace talon
 		f.data[5] = (unsigned char) (2);
 		_CANSender.publish(f);
 	}
+	*/
+
 
 }; // namespace talon_interface
 
@@ -105,18 +108,9 @@ namespace talon
 		else if(position < -7000)
 			position = -7000;
 
-		can_msgs::Frame f;
-		f.id = CONTROL_3 | _baseArbID;
-		f.dlc = 8;
-		f.is_error = false;
-		f.is_rtr = false;
-		f.is_extended = true;
-		for (int i = 0; i < 8; i++)
-			f.data[i] = 0;
-		f.data[0] = (unsigned char) (position >> 16);
-		f.data[1] = (unsigned char) (position >> 8);
-		f.data[2] = (unsigned char) (position >> 0);
-		f.data[5] = (unsigned char) (1);
-		_CANSender.publish(f);
-	}
-	*/
+	/*PID SPEED*/
+	/*
+	void TalonSRX::setSpeed(const std_msgs::Float32 &f){
+		if(!_ignoreTopics)
+			_speed = f.data; //A speed in radian/s
+	}*/

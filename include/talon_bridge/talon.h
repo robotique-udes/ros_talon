@@ -49,10 +49,11 @@ class TalonSRX
 {
 	public:
 		TalonSRX(ros::NodeHandle* nh, ros::NodeHandle private_nh, unsigned char motor_nb);
-		void setup(unsigned char ID, std::string side);
+		void setup(unsigned char ID);
 
 	private:
 		std::map<std::string, float> _gains = {{"kp",0.0}, {"ki",0.0}, {"kd",0.0}, {"kf", 0.0}};
+
 
 		uint32_t 		_data32;
 		uint 			_baseArbID;
@@ -107,7 +108,7 @@ class TalonSRX
 
 		void percentOutput();
 		void speedPID();
-		
+
 		//void ServoPos();
 		//void setPos(const std_msgs::Float32 &f);
 		void setFeedback2QuadEncoder(); //Actually, this function is not necessary as the Talon defaults to QuadEncoder.

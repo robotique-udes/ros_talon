@@ -21,12 +21,14 @@ namespace talon
         Publish to the ros_talon/current_position topic.
         This is taken care of by TalonSRX::unpackStatus3(const can_msgs::Frame &f).
         */
+
         _posPub = nh->advertise<std_msgs::Float32>(_topic + "/current_position", 10);
 
         /*
         Publish to the ros_talon/status topic.
         This is taken care of by TalonSRX::publishStatus(), and gets called every loop.
         */
+          
         _statusPub = nh->advertise<ros_talon::Status>(_topic + "/status",10);
 
         /*
@@ -60,7 +62,7 @@ namespace talon
     }
 
 
-    void TalonSRX::setup(unsigned char ID, std::string side)
+    void TalonSRX::setup(unsigned char ID)
     {
         _ccwLimit = 0; // Limits initially unactive
         _cwLimit = 0;
@@ -89,6 +91,7 @@ namespace talon
         TalonSRX::ClearStickyFaults();
 
         //Add subscriber
+
         _TalonInput = _nh->subscribe(_topic + "/cmd", 10, &TalonSRX::setCmdVal, this);
         _TalonInput_all = _nh->subscribe("cmd_percent_motors", 10, &TalonSRX::setCmdPercent, this);
 
@@ -113,10 +116,12 @@ namespace talon
 
         setKP(_gains["kp"]); setKI(_gains["ki"]); setKD(_gains["kd"]); setKF(_gains["kf"]);
 
+
         if (!_private_nh.getParam("verbose", _verbose))
             _verbose = false;
 
         ROS_INFO_STREAM("MOTOR " << (int)ID << ": mode verbose : " << _verbose);
+
     }
 
     /*
