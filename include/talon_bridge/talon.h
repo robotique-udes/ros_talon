@@ -61,8 +61,6 @@ class TalonSRX
 
 		bool 			_verbose;
 		float 			_cmd;
-		float 			_speed_to_100percent; //(NEEDS to be MEASURED)
-		std::string 	_side;
 
 		std::string 	_topic;
 		unsigned char 	_center;
@@ -105,7 +103,7 @@ class TalonSRX
 		void enableFrame();
 
 		void setCmdVal(const ros_talon::cmd &c);
-		void setCmdDiffDrive(const differential_drive::VelocityTargets &diff_drive_target);
+		void setCmdPercent(const std_msgs::Int32 &percent);
 
 		void percentOutput();
 		void speedPID();

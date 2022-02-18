@@ -24,23 +24,14 @@ namespace talon
 		}
 	}
 
-	void TalonSRX::setCmdDiffDrive(const differential_drive::VelocityTargets &diff_drive_target)
+	void TalonSRX::setCmdPercent(const std_msgs::Int32 &percent)
 	{
 		ros_talon::cmd c;
 
 		//SET speed mode to percentoutput
-		c.cmd_mode = 0; 
-
-		if (_side == "left")
-		{
-			c.cmd = diff_drive_target.left_wheel_vel_target / _speed_to_100percent * 100;
-			setCmdVal(c);
-		}
-		else if (_side == "right")
-		{
-			c.cmd = diff_drive_target.right_wheel_vel_target / _speed_to_100percent * 100;
-			setCmdVal(c);
-		}			
+		c.cmd_mode = 0;
+		c.cmd = percent.data;
+		setCmdVal(c);	
 	}
 
 

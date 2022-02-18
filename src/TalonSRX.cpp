@@ -10,8 +10,6 @@ namespace talon
         _motor_nb = motor_nb;
         _topic = "ros_talon";
         _topic.push_back(motor_nb);
-
-        _speed_to_100percent = 4.0; // m/s (NEEDS to be MEASURED)
     
         /*
         Publish to the /sent_messages topic.
@@ -64,8 +62,6 @@ namespace talon
 
     void TalonSRX::setup(unsigned char ID, std::string side)
     {
-        _side = side; //Setup a wheel side
-
         _ccwLimit = 0; // Limits initially unactive
         _cwLimit = 0;
         _center = 2; // Center on an uncertain state
@@ -94,7 +90,7 @@ namespace talon
 
         //Add subscriber
         _TalonInput = _nh->subscribe(_topic + "/in/cmd", 10, &TalonSRX::setCmdVal, this);
-        _TalonInput_all = _nh->subscribe("cmd_motors_diff_drive", 10, &TalonSRX::setCmdDiffDrive, this);
+        _TalonInput_all = _nh->subscribe("cmd_percent", 10, &TalonSRX::setCmdPercent, this);
 
         //set default mode to be percent output
         _cmd = 0.0;
@@ -116,9 +112,6 @@ namespace talon
         }
 
         setKP(_gains["kp"]); setKI(_gains["ki"]); setKD(_gains["kd"]); setKF(_gains["kf"]);
-
-        if (_side != "left" && _side != "right")
-            ROS_WARN_STREAM("MOTOR " << (int)ID << ": no autorised side specified (" << _side << ")");
 
         if (!_private_nh.getParam("verbose", _verbose))
             _verbose = false;
