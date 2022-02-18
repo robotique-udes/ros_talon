@@ -21,13 +21,13 @@ namespace talon
         Publish to the ros_talon/current_position topic.
         This is taken care of by TalonSRX::unpackStatus3(const can_msgs::Frame &f).
         */
-        _posPub = nh->advertise<std_msgs::Float32>(_topic + "/out/current_position", 10);
+        _posPub = nh->advertise<std_msgs::Float32>(_topic + "/current_position", 10);
 
         /*
         Publish to the ros_talon/status topic.
         This is taken care of by TalonSRX::publishStatus(), and gets called every loop.
         */
-        _statusPub = nh->advertise<ros_talon::Status>(_topic + "/out/status",10);
+        _statusPub = nh->advertise<ros_talon::Status>(_topic + "/status",10);
 
         /*
         Every CAN Frame received by the socket_can bridge gets published to the /recieved_messages
@@ -89,8 +89,8 @@ namespace talon
         TalonSRX::ClearStickyFaults();
 
         //Add subscriber
-        _TalonInput = _nh->subscribe(_topic + "/in/cmd", 10, &TalonSRX::setCmdVal, this);
-        _TalonInput_all = _nh->subscribe("cmd_percent", 10, &TalonSRX::setCmdPercent, this);
+        _TalonInput = _nh->subscribe(_topic + "/cmd", 10, &TalonSRX::setCmdVal, this);
+        _TalonInput_all = _nh->subscribe("cmd_percent_motors", 10, &TalonSRX::setCmdPercent, this);
 
         //set default mode to be percent output
         _cmd = 0.0;
