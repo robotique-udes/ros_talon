@@ -4,5 +4,5 @@ gains:
   kd: 0.0
   kf: 1.0
 
-verbose: true
+verbose: false
 
